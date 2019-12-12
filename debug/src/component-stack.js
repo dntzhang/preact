@@ -17,6 +17,9 @@ export function getComponentStack() {
 		const source = vnode.__source;
 		if (source) {
 			acc += ` (at ${source.fileName}:${source.lineNumber})`;
+		} else if (!babelSourcePluginNoteWritten) {
+			babelSourcePluginNoteWritten = true;
+			console.warn('Add @babel/plugin-transform-react-jsx-source to get a more detailed component stack. Note that you should not add it to production builds of your App for bundle size reasons.');
 		}
 
 		return (acc += '\n');
